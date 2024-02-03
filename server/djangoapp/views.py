@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
@@ -15,15 +15,26 @@ logger = logging.getLogger(__name__)
 
 
 # Create your views here.
-
+def some_view(request):
+    print(request)
+    # Redirect to the URL with the name 'home'
+    return HttpResponseRedirect(reverse('index'))
 
 # Create an `about` view to render a static about page
 # def about(request):
 # ...
+def get_about(request):
+    context = {}
+    if request.method == "GET":
+        return render(request, 'djangoapp/about.html', context)
 
 
 # Create a `contact` view to return a static contact page
 #def contact(request):
+def get_contact(request):
+    context = {}
+    if request.method == "GET":
+        return render(request, 'djangoapp/contact.html', context)
 
 # Create a `login_request` view to handle sign in request
 # def login_request(request):
